@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input } from "../../atoms/input";
+import { Input } from "../../atoms/input/search";
 import { Icon } from "../../atoms/icon/search";
 
 const SearchBar = () => {

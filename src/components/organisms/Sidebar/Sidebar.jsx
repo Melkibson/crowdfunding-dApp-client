@@ -34,7 +34,7 @@ const Sidebar = () => {
                     ))}
                 </div>
                 <Icon
-                    styles="bg-[#1c1c24] shadow-secondary"
+                    styles="bg-gray-800 shadow-secondary"
                     imgUrl={sun}
                 />
             </div>
