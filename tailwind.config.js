@@ -11,7 +11,21 @@ module.exports = {
       boxShadow: {
         secondary: '10px 10px 20px rgba(2, 2, 2, 0.25)',
       },
+      colors : {
+        gray: {
+          500: '#808191',
+          600: '#4b5264',
+          700: '#2c2f32',
+          800: '#1c1c24',
+          900: '#13131a',
+        },
+        lavender: '#8c6dfd',
+        green:'#1dc071',
+        lightGreen: '#4acd8d'
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

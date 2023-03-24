@@ -13,6 +13,21 @@ function App() {
                     <Home />
                 </MainLayout>
             } />
+            <Route path="/create-campaign" element={
+                <MainLayout>
+                    <CreateCampaign/>
+                </MainLayout>
+            }/>
+            <Route path="/profile" element={
+                <MainLayout>
+                    <Profile/>
+                </MainLayout>
+            }/>
+            <Route path="/campaign-details/:id" element={
+                <MainLayout>
+                    <Campaign/>
+                </MainLayout>
+            }/>
         </Routes>
     );
 }

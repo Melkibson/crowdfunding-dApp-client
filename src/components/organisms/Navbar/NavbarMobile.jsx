@@ -17,7 +17,7 @@ const NavbarMobile = ({toggle, setToggle, isActive, setIsActive, navigate}) => {
                  onClick={() => setToggle(toggle => !toggle)}
             />
             <div className={`absolute top-[60px] right-0 left-0 bg-[#1c1c24] z-10 shadow-secondary py-4
-            ${!toggle ? '-translate-y-[100vh]' : 'translate-y-0'} transition-all duration-700`}>
+            ${!toggle  ? '-translate-y-[100vh]' : 'translate-y-0'} transition-all duration-700`}>
                 <ul className="mb-4">
                     {navlinks.map(link => (
                         <li
@@ -32,7 +32,7 @@ const NavbarMobile = ({toggle, setToggle, isActive, setIsActive, navigate}) => {
                             <img src={link.imgUrl} alt={link.name}
                             className={`w-[24px] h-[24px] object-contain ${isActive === link.name ? 'grayscale-0' : 'grayscale'}`}/>
                             <span className={`ml-[20px] font-epilogue font-semibold text-[14px]
-                                ${isActive === link.name ? 'text-[#1dc071]' : 'text-[#808191]'}`}>
+                                ${isActive === link.name ? 'text-green' : 'text-gray-[600]'}`}>
                                 {link.name}
                             </span>
                         </li>

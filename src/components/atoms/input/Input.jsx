@@ -5,7 +5,7 @@ const Input = () => {
         <input
             type="text"
             placeholder="Search for campaigns"
-            className="flex w-full font-epilogue font-normal text-[14px] placeholder:text-[#4b5264] text-white bg-transparent outline-none"
+            className="flex w-full font-epilogue font-normal prose prose-sm placeholder:text-gray-600 text-white bg-transparent outline-none"
         />
     );
 }
