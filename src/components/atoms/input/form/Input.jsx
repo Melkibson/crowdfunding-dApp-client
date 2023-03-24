@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Input = ({labelName, placeholder, inputType, value, handleChange, isTextArea}) => {
+const Input = ({labelName, placeholder, inputType, value = '', handleChange, isTextArea}) => {
 
     const styles = `py-[15px] sm:px-[25px] px-[15px] outline-none border-[1px] border-gray-600 rounded-[10px] bg-gray-800 
         text-gray-400 bg-transparent font-epilogue text-white prose-sm placeholder:text-gray-500 rounded-[10px] 
@@ -16,11 +16,11 @@ const Input = ({labelName, placeholder, inputType, value, handleChange, isTextAr
             {isTextArea ? (
                 <textarea
                     required
-                          value={value}
-                          placeholder={placeholder}
-                          onChange={handleChange}
-                          rows="10"
-                          className={styles}
+                    value={value}
+                    placeholder={placeholder}
+                    onChange={handleChange}
+                    rows="10"
+                    className={styles}
                 />
             ) : (<input
                 required

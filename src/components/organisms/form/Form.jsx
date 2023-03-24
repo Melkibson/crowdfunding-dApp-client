@@ -1,12 +1,16 @@
 import React from 'react'
 import { Input } from "../../atoms/input/form";
-import {money} from "../../../assets";
 import {Banner} from "../../molecules/form";
 import {Button} from "../../atoms/button/custom";
 
-const Form = ({ handleSubmit, form, setForm }) => {
-    const handleChange = () => {
+const Form = ({ form, setForm }) => {
+    const handleChange = (fieldName, e) => {
+        setForm({...form, [fieldName]: e.target.value})
+    }
 
+    const handleSubmit = e => {
+        e.preventDefault()
+        console.log(form)
     }
     return (
         <form
@@ -19,14 +23,14 @@ const Form = ({ handleSubmit, form, setForm }) => {
                     placeholder="John Doe"
                     inputType="text"
                     value={form.name}
-                    handleChange={handleChange}
+                    handleChange={e => handleChange('name', e)}
                 />
                 <Input
                     labelName="Campaign Title *"
                     placeholder="Write a title"
                     inputType="text"
-                    value={form.name}
-                    handleChange={handleChange}
+                    value={form.title}
+                    handleChange={e => handleChange('title', e)}
                 />
             </div>
             <Input
@@ -34,7 +38,7 @@ const Form = ({ handleSubmit, form, setForm }) => {
                 placeholder="Write your story"
                 isTextArea
                 value={form.description}
-                handleChange={handleChange}
+                handleChange={e => handleChange('description', e)}
             />
             <Banner/>
             <div className="flex flex-wrap gap-[40px]">
@@ -43,16 +47,23 @@ const Form = ({ handleSubmit, form, setForm }) => {
                     placeholder="ETH 0.50"
                     inputType="text"
                     value={form.target}
-                    handleChange={handleChange}
+                    handleChange={e => handleChange('target', e)}
                 />
                 <Input
                     labelName="End Date *"
                     placeholder="End date"
                     inputType="date"
                     value={form.deadline}
-                    handleChange={handleChange}
+                    handleChange={e => handleChange('deadline', e)}
                 />
             </div>
+            <Input
+                labelName="Campaign image *"
+                placeholder="Type the URL of your campaign image"
+                inputType="text"
+                value={form.image}
+                handleChange={e => handleChange('image', e)}
+            />
             <div className="flex justify-center items-center mt-[40px]">
                 <Button
                     btnType="submit"

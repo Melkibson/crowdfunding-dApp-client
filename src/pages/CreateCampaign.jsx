@@ -18,6 +18,7 @@ const CreateCampaign = () => {
         deadline:'',
     }
 
+
     const [isLoading, setIsLoading] = useState(false);
     const [form, setForm] = useState(initialForm);
 
