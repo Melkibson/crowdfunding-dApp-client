@@ -4,6 +4,7 @@ import { Button } from "../../atoms/button/custom";
 import { logo, menu, thirdweb } from '../../../assets'
 import { navlinks } from '../../../constants'
 import { SearchBar } from "../../molecules/searchBar";
+import {NavbarMobile} from "./index";
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -29,6 +30,13 @@ const Navbar = () => {
                     </div>
                 </Link>
             </div>
+            <NavbarMobile
+                toggle={toggle}
+                setToggle={setToggle}
+                isActive={isActive}
+                setIsActive={setIsActive}
+                navigate={navigate}
+            />
         </div>
     );
 }
