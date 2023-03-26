@@ -1,14 +1,20 @@
 import React from 'react'
-import {menu, thirdweb} from "../../../assets";
+import {menu, logo} from "../../../assets";
 import {navlinks} from "../../../constants";
-import {Button} from "../../atoms/button/custom";
-const address = '0xabcdef'
+import {Button} from "../../atoms/button";
+import {useNavStateContext} from "../../../context/navbar";
+import {useStateContext} from "../../../context/contract";
+import {ConnectWallet} from "@thirdweb-dev/react";
 
-const NavbarMobile = ({toggle, setToggle, isActive, setIsActive, navigate}) => {
+const NavbarMobile = () => {
+
+    const { navigate, isActive, toggle, setToggle, setIsActive } = useNavStateContext()
+    const { connect, address } = useStateContext()
+
     return (
-        <div className="sm:hidden flex justify-between items-center relative">
+        <div className="md:hidden flex justify-between items-center relative">
             <div className="w-[40px] h-[40px] rounded-[10px] bg-gray-700 flex justify-center items-center cursor-pointer">
-                <img src={thirdweb} alt="user"
+                <img src={logo} alt="user"
                      className="w-[60%] h-[60%] object-contain"/>
 
             </div>
@@ -39,12 +45,18 @@ const NavbarMobile = ({toggle, setToggle, isActive, setIsActive, navigate}) => {
                     ))}
                 </ul>
                 <div className="flex mx-4">
-                    <Button
-                        btnType="button"
-                        title={address ? 'Create a campaign' : 'Connect'}
-                        styles={address ? 'bg-[#1dc071]' : 'bg-[#8c6dfd]'}
-                        handleClick={() => address ? navigate('create-campaign') : 'connect()'}
-                    />
+                    <div className="flex-col flex gap-4">
+                        <ConnectWallet
+                            className="font-epilogue font-semibold
+                text-white min-h-[52px]"
+                        />
+                        {address && (
+                            <Button
+                                btnType="button"
+                                title="Create a campaign"
+                                handleClick={() => navigate('create-campaign')}
+                            />)}
+                    </div>
                 </div>
             </div>
         </div>

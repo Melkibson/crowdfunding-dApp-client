@@ -1,16 +1,31 @@
 import React from 'react'
 import { Input } from "../../atoms/input/form";
 import {Banner} from "../../molecules/form";
-import {Button} from "../../atoms/button/custom";
+import {Button} from "../../atoms/button";
+import {ethers} from "ethers";
 
-const Form = ({ form, setForm }) => {
+import { useStateContext } from "../../../context/contract";
+import {checkIfImage} from "../../../utils";
+
+const Form = ({ form, setForm, setIsLoading, navigate }) => {
+    const { createCampaign } = useStateContext()
     const handleChange = (fieldName, e) => {
         setForm({...form, [fieldName]: e.target.value})
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(form)
+        checkIfImage(form.image, async exists => {
+            if(exists) {
+                setIsLoading(true);
+                await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18).toString()})
+                setIsLoading(false);
+                navigate('/')
+            } else {
+                alert('Provide a valid image URL');
+                setForm({...form, image: ''});
+            }
+        })
     }
     return (
         <form
