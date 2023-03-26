@@ -23,7 +23,7 @@ const Home = () => {
         <List
             isLoading={isLoading}
             campaigns={campaigns}
-            title="All Campaigns"
+            title={`All ${campaigns.length > 1 ? "Campaigns" : "Campaign"}`}
         />
     );
 }
