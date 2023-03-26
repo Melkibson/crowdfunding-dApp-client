@@ -1,11 +1,11 @@
-import React, {useContext, createContext, useEffect} from 'react'
-import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react";
-import contractABI from '../../contractABI.json';
+import React, {createContext, useContext} from 'react'
+import {useAddress, useContract, useContractWrite} from "@thirdweb-dev/react";
+import {ethers} from "ethers";
 
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-    const { contract } = useContract('0x6Cac21618f416D5BF30549D47523Ff9c5A51E6eD', contractABI.abi);
+    const { contract } = useContract('0x6Cac21618f416D5BF30549D47523Ff9c5A51E6eD');
     const { mutateAsync: createCampaign, isLoading } = useContractWrite(contract, 'createCampaign');
 
     const address = useAddress();
@@ -28,6 +28,20 @@ export const StateContextProvider = ({ children }) => {
 
     }
 
+    const getCampaigns = async () => {
+        const campaigns = await contract.call('getCampaigns');
+        return campaigns.map((campaign, i) => ({
+            owner: campaign.owner,
+            title: campaign.title,
+            description: campaign.description,
+            target: ethers.utils.formatEther(campaign.target.toString()),
+            deadline: campaign.deadline.toNumber(),
+            amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
+            image: campaign.image,
+            pId: i
+
+        }))
+    }
 
     return(
         <StateContext.Provider
@@ -35,6 +49,7 @@ export const StateContextProvider = ({ children }) => {
                 address,
                 contract,
                 createCampaign: publishCampaign,
+                getCampaigns
             }}
         >
             {children}

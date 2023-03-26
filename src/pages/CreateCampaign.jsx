@@ -1,10 +1,5 @@
 import React, { useState } from 'react'
-import {useNavigate} from "react-router-dom";
-import { ethers } from "ethers";
-
-import { money } from '../assets'
-import { Button } from "../components/atoms/button/custom";
-import { checkIfImage } from "../utils";
+import { useNavigate } from "react-router-dom";
 import { Heading } from "../components/atoms/heading/pages/createCampaign";
 import { Form } from "../components/organisms/form/";
 
@@ -33,6 +28,9 @@ const CreateCampaign = () => {
                     handleSubmit={handleSubmit}
                     form={form}
                     setForm={setForm}
+                    navigate={navigate}
+                    setIsLoading={setIsLoading}
+
                 />
             </div>
         );

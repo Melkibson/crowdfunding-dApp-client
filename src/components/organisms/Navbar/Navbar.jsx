@@ -18,7 +18,7 @@ const Navbar = () => {
         <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
             <SearchBar/>
             <div className="md:flex hidden flex-row justify-end gap-4">
-                <div className="flex gap-4">
+                <div className="flex gap-4 flex-col lg:flex-row">
                     <ConnectWallet
                         className="font-epilogue font-semibold prose-base leading-[26px]
                 text-white min-h-[52px] px-4 rounded-[10px] bg-green"
@@ -31,7 +31,7 @@ const Navbar = () => {
                         />)}
                 </div>
 
-                <Link>
+                <Link className="flex items-center justify-center lg:justify-items-start">
                     <div className="w-[52px] h-[52px] rounded-full bg-gray-700 flex justify-center items-center cursor-pointer">
                         <img src={thirdweb} alt="user"
                              className="w-[60%] h-[60%] object-contain"/>
