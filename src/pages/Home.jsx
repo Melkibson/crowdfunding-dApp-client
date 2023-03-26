@@ -1,5 +1,6 @@
 import React,{ useState, useEffect} from 'react'
 import { useStateContext} from "../context/contract";
+import { List } from "../components/organisms/list";
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true)
@@ -19,9 +20,11 @@ const Home = () => {
         }
     }, [address, contract])
     return (
-        <div>
-            Home
-        </div>
+        <List
+            isLoading={isLoading}
+            campaigns={campaigns}
+            title="All Campaigns"
+        />
     );
 }
 

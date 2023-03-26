@@ -39,7 +39,6 @@ export const StateContextProvider = ({ children }) => {
             amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
             image: campaign.image,
             pId: i
-
         }))
     }
 
