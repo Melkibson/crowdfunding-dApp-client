@@ -109,3 +109,4 @@ fabric.properties
 
 !.idea/codeStyles
 !.idea/runConfigurations
+/src/contractABI.json
