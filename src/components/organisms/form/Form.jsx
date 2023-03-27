@@ -41,7 +41,7 @@ const Form = ({ form, setForm, setIsLoading, navigate }) => {
                     handleChange={e => handleChange('name', e)}
                 />
                 <Input
-                    labelName="Campaign Title *"
+                    labelName="CampaignDetail Title *"
                     placeholder="Write a title"
                     inputType="text"
                     value={form.title}
@@ -73,7 +73,7 @@ const Form = ({ form, setForm, setIsLoading, navigate }) => {
                 />
             </div>
             <Input
-                labelName="Campaign image *"
+                labelName="CampaignDetail image *"
                 placeholder="Type the URL of your campaign image"
                 inputType="text"
                 value={form.image}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Heading } from "../../../atoms/heading/card/description";
-import { SubTitle } from "../../../atoms/text/card/description";
+import { Paragraph } from "../../../atoms/paragraph/card/description";
 
 const CardDesc = ({title, description}) => {
     return (
@@ -8,7 +8,7 @@ const CardDesc = ({title, description}) => {
             <Heading
                 title={title}
             />
-            <SubTitle
+            <Paragraph
                 content={description}
             />
         </div>

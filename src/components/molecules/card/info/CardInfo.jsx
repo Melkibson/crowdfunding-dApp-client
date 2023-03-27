@@ -1,6 +1,6 @@
 import React from 'react'
 import { Heading } from "../../../atoms/heading/card/info";
-import { SubTitle } from "../../../atoms/text/card/info";
+import { Paragraph } from "../../../atoms/paragraph/card/info";
 
 const CardInfo = ({amountCollected, target = '', content}) => {
     return (
@@ -8,7 +8,7 @@ const CardInfo = ({amountCollected, target = '', content}) => {
                 <Heading
                     content={amountCollected}
                 />
-                <SubTitle
+                <Paragraph
                     content={content}
                     data={target}
                 />

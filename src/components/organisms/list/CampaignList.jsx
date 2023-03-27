@@ -1,7 +1,7 @@
 import React from 'react'
 import { loader } from "../../../assets";
 import { Heading } from "../../atoms/heading/list/";
-import { CampaignCard } from "../../molecules/card";
+import { CampaignCard } from "../../organisms/card";
 import { useNavigate } from "react-router-dom";
 
 const CampaignList = ({ title, isLoading, campaigns}) => {
