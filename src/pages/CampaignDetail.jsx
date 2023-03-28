@@ -12,6 +12,7 @@ import {Story} from "../components/molecules/detail/story";
 import {Donators} from "../components/molecules/detail/donators";
 import {Form} from "../components/organisms/form/fund";
 import {ethers} from "ethers";
+import {Loader} from "../components/organisms/loader";
 
 const CampaignDetail = () => {
     const { state } = useLocation();
@@ -54,7 +55,7 @@ const CampaignDetail = () => {
 
      return (
         <div>
-            {isLoading && 'Loading...'}
+            {isLoading && <Loader/>}
             <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
                 <div className="flex-1 flex-col">
                     <Image src={state.campaign.image} alt="campaign" className="w-full h-[410px] object-cover rounded-xl"/>
