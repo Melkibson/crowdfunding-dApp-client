@@ -1,11 +1,11 @@
 import React, {createContext, useContext} from 'react'
 import {useAddress, useContract, useContractWrite} from "@thirdweb-dev/react";
-import {ethers} from "ethers";
+import { ethers } from "ethers";
 
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-    const { contract } = useContract('0x6Cac21618f416D5BF30549D47523Ff9c5A51E6eD');
+    const { contract } = useContract('0x4d83f9C26B1839a56c0F1b68991a679484D8A906');
     const { mutateAsync: createCampaign, isLoading } = useContractWrite(contract, 'createCampaign');
 
     const address = useAddress();
@@ -29,17 +29,22 @@ export const StateContextProvider = ({ children }) => {
     }
 
     const getCampaigns = async () => {
-        const campaigns = await contract.call('getCampaigns');
-        return campaigns.map((campaign, i) => ({
-            owner: campaign.owner,
-            title: campaign.title,
-            description: campaign.description,
-            target: ethers.utils.formatEther(campaign.target.toString()),
-            deadline: campaign.deadline.toNumber(),
-            amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
-            image: campaign.image,
-            pId: i
-        }))
+        const nbOfCampaigns = await contract.call('nbOfCampaigns');
+        const campaigns = [];
+        for(let i = 0; i < nbOfCampaigns; i++) {
+            const campaign = await contract.call('campaigns', [i]);
+             campaigns.push({
+                owner: campaign.owner,
+                title: campaign.title,
+                description: campaign.description,
+                target: ethers.utils.formatEther(campaign.target.toString()),
+                deadline: campaign.deadline.toNumber(),
+                amountCollected: ethers.utils.formatEther(campaign.amountCollected.toString()),
+                image: campaign.image,
+                pId: i
+            })
+        }
+        return campaigns;
     }
 
     const getUserCampaigns = async () => {
@@ -47,6 +52,38 @@ export const StateContextProvider = ({ children }) => {
         return allCampaigns.filter(campaign => campaign.owner === address);
     }
 
+    const donate = async (campaignId, amount) => {
+        return await contract.call(
+            'donateToCampaign', campaignId,
+                {
+                    value: ethers.utils.parseEther(amount)
+                })
+
+    }
+
+    const donationListener = async () => {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const contractWithSigner = new ethers.Contract(contract.getAddress(), contract.abi, provider);
+        contractWithSigner.on("Donation", (campaignId, donator, amount) => {
+            console.log(`Donation for campaign: ${campaignId}`);
+            console.log(`Donator: ${donator}`);
+            console.log(`Amount: ${ethers.utils.formatEther(amount.toString())}`);
+        });
+    };
+
+    const getDonations = async (campaignId) => {
+        const donations = await contract.call('getDonators', [campaignId]);
+        const nbOfDonations = donations[0].length;
+
+        const parsedDonations = [];
+        for(let i = 0; i < nbOfDonations; i++) {
+            parsedDonations.push({
+                donator: donations[0][i],
+                amount: ethers.utils.formatEther(donations[1][i].toString())
+            })
+        }
+        return parsedDonations;
+    }
     return(
         <StateContext.Provider
             value={{
@@ -55,6 +92,8 @@ export const StateContextProvider = ({ children }) => {
                 createCampaign: publishCampaign,
                 getCampaigns,
                 getUserCampaigns,
+                donate,
+                donationListener,
             }}
         >
             {children}

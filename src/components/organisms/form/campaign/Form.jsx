@@ -1,11 +1,11 @@
 import React from 'react'
-import { Input } from "../../atoms/input/form";
-import {Banner} from "../../molecules/form";
-import {Button} from "../../atoms/button";
+import { Input } from "../../../atoms/input/form/campaign";
+import {Banner} from "../../../molecules/form/campaign";
+import {Button} from "../../../atoms/button";
 import {ethers} from "ethers";
 
-import { useStateContext } from "../../../context/contract";
-import {checkIfImage} from "../../../utils";
+import { useStateContext } from "../../../../context/contract";
+import {checkIfImage} from "../../../../utils";
 
 const Form = ({ form, setForm, setIsLoading, navigate }) => {
     const { createCampaign } = useStateContext()
@@ -41,7 +41,7 @@ const Form = ({ form, setForm, setIsLoading, navigate }) => {
                     handleChange={e => handleChange('name', e)}
                 />
                 <Input
-                    labelName="CampaignDetail Title *"
+                    labelName="Campaign Title *"
                     placeholder="Write a title"
                     inputType="text"
                     value={form.title}
@@ -73,7 +73,7 @@ const Form = ({ form, setForm, setIsLoading, navigate }) => {
                 />
             </div>
             <Input
-                labelName="CampaignDetail image *"
+                labelName="Campaign image *"
                 placeholder="Type the URL of your campaign image"
                 inputType="text"
                 value={form.image}

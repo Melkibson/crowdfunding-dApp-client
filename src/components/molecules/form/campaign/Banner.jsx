@@ -1,6 +1,6 @@
 import React from 'react'
-import { Heading } from "../../atoms/heading/form";
-import {money} from "../../../assets";
+import { Heading } from "../../../atoms/heading/form/campaign";
+import {money} from "../../../../assets";
 
 const Banner = () => {
     return (

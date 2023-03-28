@@ -8,12 +8,13 @@ const List = ({ donators }) => {
                 <div key={`${item.donator}-${index}`} className="flex justify-between items-center gap-4">
                     <Paragraph
                         content={item.donator}
-                        styles='break-ll'
+                        styles='break-all'
                     />
                     <Paragraph
-                        content={item.donation}
-                        styles='break-ll'
-                    />                </div>
+                        content={item.amount}
+                        styles='break-all'
+                    />
+                </div>
             )) : (
                 <Paragraph
                     content="No donators yet. Be the first one!"

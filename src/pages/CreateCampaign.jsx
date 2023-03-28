@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { Heading } from "../components/atoms/heading/pages/createCampaign";
-import { Form } from "../components/organisms/form/";
+import { Form } from "../components/organisms/form/campaign";
 
 const CreateCampaign = () => {
     const navigate = useNavigate();

@@ -1,28 +1,58 @@
-import React, { useState } from 'react'
-import { Progression } from "../components/molecules/progression";
-import { useLocation, useNavigate } from "react-router-dom";
-import { calculateBarPercentage, daysLeft } from "../utils";
-import { Image } from "../components/atoms/image/detail/";
-import { DataCard } from "../components/molecules/card/data";
-import { UserCard } from "../components/molecules/card/user";
-import { Heading } from "../components/atoms/heading/pages/detailCampaign";
+import React, {useEffect, useState} from 'react'
+import {Progression} from "../components/molecules/progression";
+import {useLocation, useNavigate} from "react-router-dom";
+import {calculateBarPercentage, daysLeft} from "../utils";
+import {Image} from "../components/atoms/image/detail/";
+import {DataCard} from "../components/molecules/card/data";
+import {UserCard} from "../components/molecules/card/user";
+import {Heading} from "../components/atoms/heading/pages/detailCampaign";
 import {thirdweb} from "../assets";
 import {useStateContext} from "../context/contract";
 import {Story} from "../components/molecules/detail/story";
 import {Donators} from "../components/molecules/detail/donators";
+import {Form} from "../components/organisms/form/fund";
+import {ethers} from "ethers";
 
 const CampaignDetail = () => {
     const { state } = useLocation();
     const navigate = useNavigate();
-    const { donate, getDonations, contract, address } = useStateContext();
+    const { donate, donationListener, contract, address } = useStateContext();
 
     const [isLoading, setIsLoading] = useState(false);
     const [amount, setAmount] = useState('');
     const [donators, setDonators] = useState([]);
     const remainingDays = daysLeft(state.campaign.deadline);
 
+    const getDonatorsFromEvent = async (campaignId) => {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const contractWithSigner = new ethers.Contract(contract.getAddress(), contract.abi, provider);
+        const filter = contractWithSigner.filters.Donation(campaignId, null, null);
+        const events = await contractWithSigner.queryFilter(filter);
 
-    return (
+        return events.map((event) => {
+            const {args} = event;
+            return {
+                campaignId: args[0].toString(),
+                donator: args[1],
+                amount: ethers.utils.formatEther(args[2].toString()),
+            };
+        });
+    };
+
+    const fetchDonators = async (campaignId) => {
+        return await getDonatorsFromEvent(campaignId).then((donators) => {
+            setDonators(donators);
+        });
+    }
+
+    useEffect(() => {
+        if(contract){
+            fetchDonators(state.campaign.pId)
+            donationListener()
+        }
+    }, [])
+
+     return (
         <div>
             {isLoading && 'Loading...'}
             <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
@@ -39,7 +69,7 @@ const CampaignDetail = () => {
                 <div className="flex md:w-[150px] w-full flex-wrap justify-between gap-[30px]">
                     <DataCard title="Days Left" value={remainingDays} />
                     <DataCard title={`Raised of ${state.campaign.target}`} value={state.campaign.amountCollected} />
-                    <DataCard title="Total Backers" value={donators.length} />
+                    <DataCard title="Total Backers" value={donators.length > 0 ? donators.length : 0} />
                 </div>
             </div>
             <div className="mt-[60px] flex lg:flex-row flex-col gap-5">
@@ -60,6 +90,19 @@ const CampaignDetail = () => {
                         donators={donators}
                     />
                 </div>
+                <div className="flex-1">
+                    <Heading
+                        title="Fund"
+                    />
+                    <Form
+                        setAmount={setAmount}
+                        setIsLoading={setIsLoading}
+                        donate={donate}
+                        campaignId={state.campaign.pId}
+                        amount={amount}
+                    />
+                </div>
+
             </div>
         </div>
     );

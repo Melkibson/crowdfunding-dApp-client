@@ -1,11 +1,11 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-import { tagType, thirdweb } from "../../../assets";
-import { daysLeft } from "../../../utils";
-import {Image, UserImage} from "../../atoms/image/card";
-import { Heading } from "../../atoms/heading/card";
-import { Description } from "../../molecules/card/description";
-import { Info } from "../../molecules/card/info";
+import { tagType, thirdweb } from "../../../../assets";
+import { daysLeft } from "../../../../utils";
+import {Image, UserImage} from "../../../atoms/image/card";
+import { Heading } from "../../../atoms/heading/card";
+import { Description } from "../../../molecules/card/description";
+import { Info } from "../../../molecules/card/info";
 
 const CampaignCard = (props) => {
     const remainingDays = daysLeft(props.deadline);
