@@ -2,13 +2,15 @@ import React from 'react'
 import { Input } from "../../../atoms/input/form/fund";
 import { Heading } from "../../../atoms/heading/form/fund";
 import { Hook } from "../../../molecules/form/fund";
-import {Button} from "../../../atoms/button";
+import { Button } from "../../../atoms/button";
+import { useNavigate } from "react-router-dom";
 
 const Form = ({ amount, setAmount, setIsLoading, donate, campaignId}) => {
-
+    const navigate = useNavigate();
     const handleDonate = async () => {
         setIsLoading(true);
         await donate(campaignId, amount);
+        navigate('/');
         setIsLoading(false)
     }
 

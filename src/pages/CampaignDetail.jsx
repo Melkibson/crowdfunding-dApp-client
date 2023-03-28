@@ -16,7 +16,6 @@ import {Loader} from "../components/organisms/loader";
 
 const CampaignDetail = () => {
     const { state } = useLocation();
-    const navigate = useNavigate();
     const { donate, donationListener, contract, address } = useStateContext();
 
     const [isLoading, setIsLoading] = useState(false);
