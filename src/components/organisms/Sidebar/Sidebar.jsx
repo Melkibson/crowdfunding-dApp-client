@@ -10,7 +10,7 @@ const Sidebar = () => {
     const navigate = useNavigate();
     const [isActive, setIsActive] = useState('dashboard');
     return (
-        <div className="flex justify-between items-center flex-col sticky top-5 h-[70vh]">
+        <div className="flex justify-between items-center flex-col sticky top-5 h-[60vh]">
             <Link to={'/'}>
                 <Icon
                     styles="w-[52px] h-[52px] bg-gray-700"
@@ -18,7 +18,7 @@ const Sidebar = () => {
                 />
             </Link>
             <div className="flex-1 flex flex-col justify-between items-center bg-gray-800 rounded-[20px] w-[76px] py-4 mt-12">
-                <div className="flex flex-col justify-center items-center gap-3">
+                <div className="flex flex-col justify-center items-center gap-4">
                     {navlinks.map(link => (
                         <Icon
                             key={link.name}
