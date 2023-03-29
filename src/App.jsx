@@ -4,6 +4,7 @@ import {Route, Routes} from 'react-router-dom'
 import MainLayout from "./templates/mainLayout/MainLayout";
 
 import {Campaign, CreateCampaign, Profile, Home} from "./pages";
+import PaymentHistory from "./pages/PaymentHistory";
 
 function App() {
     return (
@@ -26,6 +27,11 @@ function App() {
             <Route path="/campaign-details/:id" element={
                 <MainLayout>
                     <Campaign/>
+                </MainLayout>
+            }/>
+            <Route path="/payment" element={
+                <MainLayout>
+                    <PaymentHistory/>
                 </MainLayout>
             }/>
         </Routes>

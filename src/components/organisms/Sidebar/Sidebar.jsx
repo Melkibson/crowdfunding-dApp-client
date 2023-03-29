@@ -4,11 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { logo, sun } from '../../../assets'
 import { navlinks } from '../../../constants'
 import { Icon } from "../../atoms/icon/sidebar";
+import {useStateContext} from "../../../context/contract";
 
 
 const Sidebar = () => {
     const navigate = useNavigate();
     const [isActive, setIsActive] = useState('dashboard');
+    const { address } = useStateContext();
+    const payment = navlinks.find(link => link.name === 'payment');
+    address ? payment.disabled = false : payment.disabled = true;
+
     return (
         <div className="flex justify-between items-center flex-col sticky top-5 h-[60vh]">
             <Link to={'/'}>

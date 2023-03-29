@@ -1,7 +1,7 @@
 import React from 'react'
-import {loader} from "../../../assets";
-import Image from "../../atoms/image/loader/Image";
-import {Paragraph} from "../../atoms/paragraph/loader";
+import {loader} from "../../../../assets";
+import Image from "../../../atoms/image/loader/Image";
+import {Paragraph} from "../../../atoms/paragraph/loader";
 
 const Loader = () => {
     return (

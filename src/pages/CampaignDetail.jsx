@@ -12,7 +12,7 @@ import {Story} from "../components/molecules/detail/story";
 import {Donators} from "../components/molecules/detail/donators";
 import {Form} from "../components/organisms/form/fund";
 import {ethers} from "ethers";
-import {Loader} from "../components/organisms/loader";
+import {Loader} from "../components/organisms/loader/transaction";
 
 const CampaignDetail = () => {
     const { state } = useLocation();

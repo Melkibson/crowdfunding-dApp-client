@@ -16,7 +16,7 @@ const Profile = () => {
 
     useEffect(() => {
         if(contract) {
-            fetchCampaigns().then(r => console.log("campaigns", r))
+            fetchCampaigns().then(r => console.log("success fetching campaigns' user"))
         }
     }, [address, contract])
     return (
