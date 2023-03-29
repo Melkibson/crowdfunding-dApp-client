@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Progression} from "../components/molecules/progression";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {calculateBarPercentage, daysLeft} from "../utils";
 import {Image} from "../components/atoms/image/detail/";
 import {DataCard} from "../components/molecules/card/data";
@@ -19,7 +19,7 @@ const CampaignDetail = () => {
     const { donate, donationListener, contract, address } = useStateContext();
 
     const [isLoading, setIsLoading] = useState(false);
-    const [amount, setAmount] = useState('');
+    const [amount, setAmount] = useState(0);
     const [donators, setDonators] = useState([]);
     const remainingDays = daysLeft(state.campaign.deadline);
 
@@ -41,14 +41,27 @@ const CampaignDetail = () => {
 
     const fetchDonators = async (campaignId) => {
         return await getDonatorsFromEvent(campaignId).then((donators) => {
-            setDonators(donators);
+            const uniqueDonators = donators.reduce((accumulator, current) => {
+                const existingDonator = accumulator.find(item => item.donator === current.donator);
+
+                if (existingDonator) {
+                    existingDonator.amount = parseFloat(existingDonator.amount) + parseFloat(current.amount);
+                } else {
+                    accumulator.push(current);
+                }
+                return accumulator;
+            }, []);
+
+            setDonators(uniqueDonators);
         });
     }
 
+
+
     useEffect(() => {
         if(contract){
-            fetchDonators(state.campaign.pId)
-            donationListener()
+            fetchDonators(state.campaign.pId);
+            donationListener();
         }
     }, [])
 
