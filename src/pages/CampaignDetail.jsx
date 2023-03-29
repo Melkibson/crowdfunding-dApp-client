@@ -16,7 +16,7 @@ import {Loader} from "../components/organisms/loader/transaction";
 
 const CampaignDetail = () => {
     const { state } = useLocation();
-    const { donate, donationListener, contract, address } = useStateContext();
+    const { donate, donationListener, contract } = useStateContext();
 
     const [isLoading, setIsLoading] = useState(false);
     const [amount, setAmount] = useState(0);
@@ -55,8 +55,6 @@ const CampaignDetail = () => {
             setDonators(uniqueDonators);
         });
     }
-
-
 
     useEffect(() => {
         if(contract){

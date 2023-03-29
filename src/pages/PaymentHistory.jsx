@@ -1,28 +1,12 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Heading} from "../components/atoms/heading/list";
 import {Card} from "../components/organisms/card/payment";
-import {useStateContext} from "../context/contract";
-import {Loader} from "../components/organisms/loader/transaction";
 import {daysLeft} from "../utils";
 import {loader} from "../assets";
+import {useCampaignStateContext} from "../context/campaigns";
 
 const PaymentHistory = () => {
-    const [isLoading, setIsLoading] = useState(true)
-    const [campaigns, setCampaigns] = useState([])
-    const { address, contract, getUserCampaigns } = useStateContext()
-
-    const fetchCampaigns = async () => {
-        const campaigns = await getUserCampaigns()
-        setCampaigns(campaigns)
-        setIsLoading(false)
-    }
-
-    useEffect(() => {
-        if(contract) {
-            fetchCampaigns().then(r => console.log("success fetching campaigns' user"))
-        }
-    }, [address, contract])
-
+    const { isLoading, campaigns } = useCampaignStateContext()
     return (
         <div>
             <Heading
@@ -48,9 +32,8 @@ const PaymentHistory = () => {
                                 deadline={`${remainingDays} days`}
                                 status={status}
                             />
-                    )
-
-                 })
+                        )
+                    })
                 }
             </div>
         </div>

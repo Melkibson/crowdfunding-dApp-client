@@ -1,24 +1,9 @@
-import React, {useEffect, useState} from 'react'
-import {useStateContext} from "../context/contract";
+import React from 'react'
 import {List} from "../components/organisms/list";
+import {useCampaignStateContext} from "../context/campaigns";
 
 const Profile = () => {
-    const [isLoading, setIsLoading] = useState(true)
-    const [campaigns, setCampaigns] = useState([])
-
-    const { address, contract, getUserCampaigns } = useStateContext()
-
-    const fetchCampaigns = async () => {
-        const campaigns = await getUserCampaigns()
-        setCampaigns(campaigns)
-        setIsLoading(false)
-    }
-
-    useEffect(() => {
-        if(contract) {
-            fetchCampaigns().then(r => console.log("success fetching campaigns' user"))
-        }
-    }, [address, contract])
+    const { isLoading, campaigns } = useCampaignStateContext()
     return (
         <List
             isLoading={isLoading}

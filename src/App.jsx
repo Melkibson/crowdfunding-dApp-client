@@ -5,6 +5,7 @@ import MainLayout from "./templates/mainLayout/MainLayout";
 
 import {Campaign, CreateCampaign, Profile, Home} from "./pages";
 import PaymentHistory from "./pages/PaymentHistory";
+import {CampaignStateContextProvider} from "./context/campaigns";
 
 function App() {
     return (
@@ -20,9 +21,11 @@ function App() {
                 </MainLayout>
             }/>
             <Route path="/profile" element={
-                <MainLayout>
-                    <Profile/>
-                </MainLayout>
+                <CampaignStateContextProvider>
+                    <MainLayout>
+                        <Profile/>
+                    </MainLayout>
+                </CampaignStateContextProvider>
             }/>
             <Route path="/campaign-details/:id" element={
                 <MainLayout>
@@ -30,9 +33,11 @@ function App() {
                 </MainLayout>
             }/>
             <Route path="/payment" element={
-                <MainLayout>
-                    <PaymentHistory/>
-                </MainLayout>
+                <CampaignStateContextProvider>
+                    <MainLayout>
+                        <PaymentHistory/>
+                    </MainLayout>
+                </CampaignStateContextProvider>
             }/>
         </Routes>
     );
