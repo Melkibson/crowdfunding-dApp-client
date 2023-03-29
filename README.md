@@ -1,37 +1,36 @@
-## Getting Started
+# Crowdfunding App - Client
 
-Create a project using this example:
+This project is a decentralized Crowdfunding application built using Thirdweb, Vite.js, and Tailwind CSS. Users can create, browse, and donate to crowdfunding campaigns on the Ethereum blockchain.
 
-```bash
-npx thirdweb create --template vite-javascript-starter
-```
+## Installation
 
-You can start editing the page by modifying `src/main.jsx`. The page auto-updates as you edit the file.
+Before you start, make sure you have Node.js and npm installed.
 
-On `src/index.jsx`, you'll find our `ThirdwebProvider` wrapping your app,
-this is necessary for our [hooks](https://portal.thirdweb.com/react) and
-[UI Components](https://portal.thirdweb.com/ui-components) to work.
+1. Clone the repository:
 
-### Deploy to IPFS
+git clone https://github.com/Melkibson/crowdfunding-dApp-client.git
 
-Deploy a copy of your application to IPFS using the following command:
+2. Install dependencies:
 
-```bash
-yarn deploy
-```
+npm install
 
-## Learn More
+## Running the app
 
-To learn more about thirdweb, Vite and React, take a look at the following resources:
+To run the app in development mode, run:
 
-- [thirdweb React Documentation](https://docs.thirdweb.com/react) - learn about our React SDK.
-- [thirdweb JavaScript Documentation](https://docs.thirdweb.com/react) - learn about our JavaScript/TypeScript SDK.
-- [thirdweb Portal](https://docs.thirdweb.com/react) - check our guides and development resources.
-- [Vite Documentation](https://vitejs.dev/guide/) - learn about Vite features.
-- [React documentation](https://reactjs.org/) - learn React.
+npm run dev
 
-You can check out [the thirdweb GitHub organization](https://github.com/thirdweb-dev) - your feedback and contributions are welcome!
+The app will be available at http://localhost:5173/
 
-## Join our Discord!
+## Building the app
 
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
+To build the app for production, run:
+
+npm run build
+
+
+The output will be in the `dist/` folder.
+
+
+
+
