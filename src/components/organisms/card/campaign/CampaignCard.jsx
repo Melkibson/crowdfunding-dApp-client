@@ -1,6 +1,4 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom";
-import { tagType, thirdweb } from "../../../../assets";
 import { daysLeft } from "../../../../utils";
 import {Image, UserImage} from "../../../atoms/image/card";
 import { Heading } from "../../../atoms/heading/card";

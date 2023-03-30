@@ -6,7 +6,7 @@ import {loader} from "../assets";
 import {useCampaignStateContext} from "../context/campaigns";
 
 const PaymentHistory = () => {
-    const { isLoading, campaigns } = useCampaignStateContext()
+    const { isLoading, userCampaigns } = useCampaignStateContext()
     return (
         <div>
             <Heading
@@ -20,7 +20,7 @@ const PaymentHistory = () => {
                         className="w-[100px] h-[100px] object-contain"
                     />
                 )}
-                {campaigns.map((campaign, index) => {
+                {userCampaigns.map((campaign, index) => {
                     const remainingDays = daysLeft(campaign.deadline);
                     const status = campaign.deadline > Date.now() ? "Active" : "Ended"
                     return(

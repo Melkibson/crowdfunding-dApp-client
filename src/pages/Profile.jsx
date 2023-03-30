@@ -3,12 +3,12 @@ import {List} from "../components/organisms/list";
 import {useCampaignStateContext} from "../context/campaigns";
 
 const Profile = () => {
-    const { isLoading, campaigns } = useCampaignStateContext()
+    const { isLoading, filteredCampaigns } = useCampaignStateContext()
     return (
         <List
             isLoading={isLoading}
-            campaigns={campaigns}
-            title={`My ${campaigns.length > 1 ? "Campaigns" : "Campaign"}`}
+            campaigns={filteredCampaigns}
+            title={`My ${filteredCampaigns.length > 1 ? "Campaigns" : "Campaign"}`}
         />
     );
 }

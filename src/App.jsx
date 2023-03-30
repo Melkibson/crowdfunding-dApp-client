@@ -11,21 +11,20 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={
-                <MainLayout>
-                    <Home />
-                </MainLayout>
-            } />
+                    <MainLayout>
+                        <Home />
+                    </MainLayout>
+
+                    } />
             <Route path="/create-campaign" element={
                 <MainLayout>
                     <CreateCampaign/>
                 </MainLayout>
             }/>
             <Route path="/profile" element={
-                <CampaignStateContextProvider>
                     <MainLayout>
                         <Profile/>
                     </MainLayout>
-                </CampaignStateContextProvider>
             }/>
             <Route path="/campaign-details/:id" element={
                 <MainLayout>
@@ -33,11 +32,9 @@ function App() {
                 </MainLayout>
             }/>
             <Route path="/payment" element={
-                <CampaignStateContextProvider>
                     <MainLayout>
                         <PaymentHistory/>
                     </MainLayout>
-                </CampaignStateContextProvider>
             }/>
         </Routes>
     );

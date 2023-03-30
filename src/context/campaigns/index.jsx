@@ -9,22 +9,61 @@ export const CampaignStateContextProvider = ({ children }) => {
 
     const [isLoading, setIsLoading] = useState(true)
     const [campaigns, setCampaigns] = useState([])
-    const { address, contract, getUserCampaigns } = useStateContext()
+    const [userCampaigns, setUserCampaigns] = useState([])
+    const [filteredCampaigns, setFilteredCampaigns] = useState(campaigns);
+
+    const {
+        address,
+        contract,
+        getCampaigns,
+        getUserCampaigns,
+    } = useStateContext()
 
     const fetchCampaigns = async () => {
-        const campaigns = await getUserCampaigns()
+        const campaigns = await getCampaigns()
         setCampaigns(campaigns)
         setIsLoading(false)
     }
+    const fetchUserCampaigns = async () => {
+        const campaigns = await getUserCampaigns()
+        setUserCampaigns(campaigns)
+        setIsLoading(false)
+    }
+
     useEffect(() => {
+
         if(contract) {
-            fetchCampaigns().then(r => console.log("success fetching campaigns' user"))
+
+            fetchCampaigns()
+                .then(() => {
+                    setFilteredCampaigns(campaigns)
+                    console.log("success fetching campaigns")
+                })
+                .catch((err) => console.log('error fetching campaigns',err))
+        }
+        if(contract && address) {
+            fetchUserCampaigns()
+                .then(() => {
+                    setFilteredCampaigns(userCampaigns)
+                    console.log("success fetching user campaigns")
+                })
+                .catch((err) => console.log('error fetching user campaigns',err))
+
         }
     }, [address, contract])
 
     return(
         <StateContext.Provider
-            value={{ isLoading, campaigns }}
+            value={{
+                isLoading,
+                setIsLoading,
+                setCampaigns,
+                campaigns,
+                userCampaigns,
+                setFilteredCampaigns,
+                filteredCampaigns,
+                setUserCampaigns
+            }}
         >
             {children}
         </StateContext.Provider>
